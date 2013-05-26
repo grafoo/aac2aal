@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{447CF698-D873-4CE0-BA75-510B5A3BAD17}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kernel</RootNamespace>
     <AssemblyName>Kernel</AssemblyName>
@@ -110,12 +110,10 @@
     <Compile Include="Stubs\CONFIGURATION.cs" />
     <Compile Include="Stubs\Coordinate.cs" />
     <Compile Include="Stubs\Device.cs" />
-    <Compile Include="Stubs\DeviceMessageType.cs" />
     <Compile Include="Stubs\DeviceType.cs" />
     <Compile Include="Stubs\EventbusMessage.cs" />
     <Compile Include="Stubs\GATEWAY.cs" />
     <Compile Include="Stubs\HARDWAREID.cs" />
-    <Compile Include="Stubs\HomeControlCommand.cs" />
     <Compile Include="Stubs\MANUFACTURER.cs" />
     <Compile Include="Stubs\Metavalues.cs" />
   </ItemGroup>
@@ -124,7 +122,10 @@
       <HintPath>..\..\..\..\..\Downloads\Json50r5\Bin\Portable40\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="AppxManifest.xml" />
+    <Content Include="json.txt" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

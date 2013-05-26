@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class MANUFACTURER
+    public sealed class MANUFACTURER
     {
         public string key { get; set; }
         public string type { get; set; }

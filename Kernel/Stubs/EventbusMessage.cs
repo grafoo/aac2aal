@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class EventbusMessage
+    public sealed class EventbusMessage
     {
         public string address { get; set; }
         public string mode { get; set; }

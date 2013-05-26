@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class DeviceType {
+    public sealed class DeviceType
+    {
 	/*
 	MDC_AI_TYPE_SENSOR_UNKNOWN(0, false, true, "Unknown Sensor"),							// NOT	ISO-11073 10471 conform
 

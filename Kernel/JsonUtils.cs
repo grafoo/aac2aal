@@ -23,8 +23,25 @@ namespace Kernel
         {
             //String json = Windows.Storage.FileIO.ReadTextAsync
             //EventbusMessage ebm = JsonConvert.DeserializeObject<EventbusMessage>
+            //StorageFolder storageFolder = KnownFolders.DocumentsLibrary;
+
+            
+
 
         }
+
+        public async void m()
+        {
+            var file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"json.txt");
+            var stream = await file.OpenReadAsync();
+            var rdr = new StreamReader(stream.AsStream());
+
+            Task.Run(() =>
+            {
+                var contents = rdr.ReadToEnd();
+            });
+        }
+
 
         static void Main(string[] args)
         {

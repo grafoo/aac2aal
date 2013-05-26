@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class HARDWAREID
+    public sealed class HARDWAREID
     {
         public string key { get; set; }
         public string type { get; set; }

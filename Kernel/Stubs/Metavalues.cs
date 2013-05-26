@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class Metavalues
+    public sealed class Metavalues 
     {
         public HARDWAREID HARDWARE_ID { get; set; }
         public CONFIGURATION CONFIGURATION { get; set; }

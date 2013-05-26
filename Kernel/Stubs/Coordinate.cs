@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class Coordinate
+    public sealed class Coordinate
     {
         public int index { get; set; }
         public double x { get; set; }

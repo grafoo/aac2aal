@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class GATEWAY
+    public sealed class GATEWAY
     {
         public string key { get; set; }
         public string type { get; set; }

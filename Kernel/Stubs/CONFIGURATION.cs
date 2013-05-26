@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kernel.Stubs
 {
-    public class CONFIGURATION
+    public sealed class CONFIGURATION
     {
         public string key { get; set; }
         public string type { get; set; }
