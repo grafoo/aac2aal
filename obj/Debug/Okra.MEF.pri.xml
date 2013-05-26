@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PriInfo>
+	<ResourceMap name="Okra.MEF" version="1.0" primary="true">
+		<Qualifiers>
+			<Language>EN-US</Language>
+		</Qualifiers>
+		<ResourceMapSubtree name="Okra.MEF">
+			<ResourceMapSubtree name="Errors">
+				<NamedResource name="Exception_ArgumentException_SpecifiedEnumIsNotDefined" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_ArgumentException_SpecifiedEnumIsNotDefined">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The argument contains an undefined enumeration value.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_ArgumentException_StringIsNullOrEmpty" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_ArgumentException_StringIsNullOrEmpty">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The argument cannot be null or an empty string.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_ArgumentOutOfRange_ArrayIndexOutOfRange" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_ArgumentOutOfRange_ArrayIndexOutOfRange">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The specified index is outside the bounds of the array.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_ArgumentOutOfRange_CountMustBeZeroOrPositive" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_ArgumentOutOfRange_CountMustBeZeroOrPositive">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The count must be greater than or equal to zero.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_InvalidOperation_ActivationKindNotSupported" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_InvalidOperation_ActivationKindNotSupported">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The specified ActivationKind is not supported.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_InvalidOperation_CannotGoBackWithEmptyBackStack" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_InvalidOperation_CannotGoBackWithEmptyBackStack">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>You cannot navigate backwards as the back stack is empty.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_InvalidOperation_CannotModifyReadOnlyCollection" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_InvalidOperation_CannotModifyReadOnlyCollection">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot modify a read-only collection.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_InvalidOperation_CannotNavigateAsPageIsNotFound" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_InvalidOperation_CannotNavigateAsPageIsNotFound">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot navigate as a page named '{0}' does not exist.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_InvalidOperation_CannotRegisterServiceMultipleTimes" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_InvalidOperation_CannotRegisterServiceMultipleTimes">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot register the service as it is already registered.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Exception_InvalidOperation_CannotUnregisterUnregisteredService" uri="ms-resource://Okra.MEF/Okra.MEF/Errors/Exception_InvalidOperation_CannotUnregisterUnregisteredService">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot unregister the service as it is not currently registered.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+	</ResourceMap>
+</PriInfo>

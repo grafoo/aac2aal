@@ -1,0 +1,12 @@
+Assets\DarkGray.png
+Assets\LightGray.png
+Assets\Logo.png
+Assets\MediumGray.png
+Assets\SmallLogo.png
+Assets\SplashScreen.png
+Assets\StoreLogo.png
+App.xaml
+Common\StandardStyles.xaml
+Pages\GroupDetail\GroupDetailPage.xaml
+Pages\Home\HomePage.xaml
+Pages\ItemDetail\ItemDetailPage.xaml

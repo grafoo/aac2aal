@@ -1,0 +1,2 @@
+C:\Users\dheigl\Documents\Visual Studio 2012\Projects\aac2aal_UI\aac2aal_UI\aac2aal_UI.csproj;neutral
+C:\Users\dheigl\Documents\Visual Studio 2012\Projects\Kernel\Kernel\Kernel.csproj;neutral
