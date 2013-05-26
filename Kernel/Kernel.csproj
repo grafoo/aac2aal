@@ -100,13 +100,36 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="JsonUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stubs\Command.cs" />
+    <Compile Include="Stubs\CONFIGURATION.cs" />
+    <Compile Include="Stubs\Coordinate.cs" />
+    <Compile Include="Stubs\Device.cs" />
+    <Compile Include="Stubs\DeviceMessageType.cs" />
+    <Compile Include="Stubs\DeviceType.cs" />
+    <Compile Include="Stubs\EventbusMessage.cs" />
+    <Compile Include="Stubs\GATEWAY.cs" />
+    <Compile Include="Stubs\HARDWAREID.cs" />
+    <Compile Include="Stubs\HomeControlCommand.cs" />
+    <Compile Include="Stubs\MANUFACTURER.cs" />
+    <Compile Include="Stubs\Metavalues.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\Downloads\Json50r5\Bin\Portable40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
