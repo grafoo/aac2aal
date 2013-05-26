@@ -12,6 +12,6 @@ namespace Kernel.Stubs
         public string mode { get; set; }
         public string bodyType { get; set; }
         public string senderId { get; set; }
-        public Type body { get; set; }
+        public Body body { get; set; }
     }
 }

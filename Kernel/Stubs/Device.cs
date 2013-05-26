@@ -13,9 +13,10 @@ namespace Kernel.Stubs
         public string category { get; set; }
         public int roomId { get; set; }
         public Coordinate coordinate { get; set; }
-        private List<Coordinate> areaCoordinates;
-        private List<Metavalues> metavalues;
+        private IList<Coordinate> areaCoordinates {get;set;}
+        private IList<Metavalues> metavalues {get;set;}
 
+        /*
         private Device(int id, int type, string category, int roomId, Coordinate coordinate, List<Object> areaCoordinates, Metavalues metavalues) {
             this.id = id;
             this.type = type;
@@ -24,6 +25,6 @@ namespace Kernel.Stubs
             this.areaCoordinates = new List<Coordinate>();
             this.metavalues = new List<Metavalues>();
         }
-            
+         */   
     }
 }

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Kernel.Stubs;
 using System.IO;
+using Kernel.Stubs1;
 
 namespace Kernel
 {
-    class JsonUtils
+    public class JsonUtils
     {
         
 
@@ -19,33 +19,14 @@ namespace Kernel
             return null;
         }
 
-        public void convertfromJson(String json)
-        {
-            //String json = Windows.Storage.FileIO.ReadTextAsync
-            //EventbusMessage ebm = JsonConvert.DeserializeObject<EventbusMessage>
-            //StorageFolder storageFolder = KnownFolders.DocumentsLibrary;
-
-            
 
 
-        }
-
-        public async void m()
-        {
-            var file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"json.txt");
-            var stream = await file.OpenReadAsync();
-            var rdr = new StreamReader(stream.AsStream());
-
-            Task.Run(() =>
-            {
-                var contents = rdr.ReadToEnd();
-            });
-        }
-
-
-        static void Main(string[] args)
+        public EventbusMessage convertfromJson(string jsonString)
         {
             
+                EventbusMessage a = JsonConvert.DeserializeObject<EventbusMessage>(jsonString);
+                return a;
+           
             
         }
     }
