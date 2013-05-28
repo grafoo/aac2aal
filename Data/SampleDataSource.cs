@@ -240,7 +240,6 @@ namespace aac2aal_UI.Data
         public static IEnumerable<SampleDataGroup> GetGroups(string uniqueId)
         {
             if (!uniqueId.Equals("AllGroups")) throw new ArgumentException("Only 'AllGroups' is supported as a collection of groups");
-            //RefreshDataSource();
             return _sampleDataSource.AllGroups;
         }
 
@@ -260,10 +259,6 @@ namespace aac2aal_UI.Data
             return null;
         }
 
-        public SampleDataSource() 
-        {
-           // RefreshDataSource();
-        }
 
 
         public static void RefreshDataSource()
@@ -273,60 +268,6 @@ namespace aac2aal_UI.Data
             EventbusMessage ebm = iju.convertfromJson(getJsonString());
             List<String> groups = new List<String>();
             List<SampleDataGroup> sampleDataGroups = new List<SampleDataGroup>();
-            /*groups.Add("SENSOR");
-            groups.Add("ACTUATOR");
-            foreach (var group in groups)
-            {
-                var sampleDataGroup = new SampleDataGroup(
-                    group,
-                    group,
-                    group,
-                    "Assets/LightGray.png",
-                    group);
-
-                _sampleDataSource.AllGroups.Add(sampleDataGroup);
-
-                foreach (var Device in ebm.Body.Devices)
-                {
-                    String cat = Device.Category;
-                    switch (cat)
-                    {
-                        case "SENSOR":
-                            if (Device.Metavalues.CONFIGURATION != null)
-                            {
-                                sampleDataGroup.Items.Add(new SampleDataItem(
-                                    Convert.ToString(Device.Id),
-                                    Device.Metavalues.CONFIGURATION.Value,
-                                    Device.Metavalues.CONFIGURATION.Value,
-                                    "Assets/LightGray.png",
-                                    "DESCRIPTION",
-                                    "CONTENT",
-                                    sampleDataGroup));
-                                break;
-                            }
-                                break;
-
-                           
-                            
-                        case "ACTUATOR":
-                                if (Device.Metavalues.CONFIGURATION != null)
-                                {
-                                    sampleDataGroup.Items.Add(new SampleDataItem(
-                                        Convert.ToString(Device.Id),
-                                        Device.Metavalues.CONFIGURATION.Value,
-                                        Device.Metavalues.CONFIGURATION.Value,
-                                        "Assets/LightGray.png",
-                                        "DESCRIPTION",
-                                        "CONTENT",
-                                        sampleDataGroup));
-                                    break;
-                                }
-                                break;
-                    }
-                }
-
-            }*/
-
             foreach (var Device in ebm.Body.Devices)
             {
                 
@@ -341,7 +282,7 @@ namespace aac2aal_UI.Data
                         Device.Category,
                         "Assets/LightGray.png",
                         "DESCRIPTION");
-                        _sampleDataSource._allGroups.Add(sampleDataGroup);
+                        _sampleDataSource.AllGroups.Add(sampleDataGroup);
                         sampleDataGroups.Add(sampleDataGroup);
 
                     }
@@ -357,7 +298,7 @@ namespace aac2aal_UI.Data
                         Device.Category,
                         "Assets/LightGray.png",
                         "DESCRIPTION");
-                        _sampleDataSource._allGroups.Add(sampleDataGroup);
+                        _sampleDataSource.AllGroups.Add(sampleDataGroup);
                         sampleDataGroups.Add(sampleDataGroup);
                     }
 
@@ -370,15 +311,14 @@ namespace aac2aal_UI.Data
                 {
                     if (Device.Metavalues.CONFIGURATION != null)
                     {
-                        SampleDataGroup sampleDataGroup = sampleDataGroups[0];
-                        sampleDataGroup.Items.Add(new SampleDataItem(
-                            Convert.ToString(Device.Id),
+                        sampleDataGroups[0].Items.Add(new SampleDataItem(
+                            "Sensor"+Convert.ToString(Device.Id),
                             Device.Metavalues.CONFIGURATION.Value,
                             Device.Metavalues.CONFIGURATION.Value,
                             "Assets/LightGray.png",
                             "DESCRIPTION",
                             "CONTENT",
-                            sampleDataGroup));
+                            sampleDataGroups[0]));
                     }
                 }
                 else if(Device.Category.Equals("ACTUATOR"))
@@ -386,7 +326,7 @@ namespace aac2aal_UI.Data
                     if (Device.Metavalues.CONFIGURATION != null)
                     {
                         sampleDataGroups[1].Items.Add(new SampleDataItem(
-                            Convert.ToString(Device.Id),
+                            "Actuator"+Convert.ToString(Device.Id),
                             Device.Metavalues.CONFIGURATION.Value,
                             Device.Metavalues.CONFIGURATION.Value,
                             "Assets/LightGray.png",

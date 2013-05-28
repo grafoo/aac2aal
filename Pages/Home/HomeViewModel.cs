@@ -74,6 +74,7 @@ namespace aac2aal_UI.Pages.Home
         private void Initialize()
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
+            //Data.SampleDataSource.RefreshDataSource();
             Data.SampleDataSource.RefreshDataSource();
             Groups = SampleDataSource.GetGroups("AllGroups");
         }
