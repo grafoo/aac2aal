@@ -19,5 +19,7 @@ namespace aac2aal_UI
             // Configure the navigation manager to preseve application state in local storage
             NavigationManager.NavigationStorageType = NavigationStorageType.Local;
         }
+
+
     }
 }

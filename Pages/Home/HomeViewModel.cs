@@ -13,7 +13,8 @@ using Kernel;
 using Windows.UI.Xaml;
 using System.IO;
 using Windows.Storage;
-using Kernel.Stubs1;
+using Kernel.Stubs;
+using Kernel.Services;
 
 namespace aac2aal_UI.Pages.Home
 {
@@ -33,12 +34,13 @@ namespace aac2aal_UI.Pages.Home
         public HomeViewModel(INavigationContext navigationContext)
             : base(navigationContext)
         {
+            //this.m();
             Initialize();
             InitializeCommands();
-            this.m();
+            
             
         }
-
+        /*
         public async void m()
         {
 
@@ -46,10 +48,10 @@ namespace aac2aal_UI.Pages.Home
             StorageFile json = await storageFolder.GetFileAsync("json.txt");
             string text = await Windows.Storage.FileIO.ReadTextAsync(json);
             JsonUtils ju = new JsonUtils();
-            EventbusMessage ebm = ju.convertfromJson(text);
+            this.ebm = ju.convertfromJson(text);
             Body body = ebm.Body;
 
-        }
+        }*/
 
 
         public IEnumerable<SampleDataGroup> Groups
@@ -72,6 +74,7 @@ namespace aac2aal_UI.Pages.Home
         private void Initialize()
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
+            Data.SampleDataSource.RefreshDataSource();
             Groups = SampleDataSource.GetGroups("AllGroups");
         }
 

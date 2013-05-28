@@ -11,6 +11,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Collections.Specialized;
+using aac2aal_UI.Pages.Home;
+using Kernel;
+using Kernel.Services;
+using Kernel.Stubs;
+using System.Threading.Tasks;
 
 // The data model defined by this file serves as a representative example of a strongly-typed
 // model that supports notification when members are added, removed, or modified.  The property
@@ -153,7 +158,7 @@ namespace aac2aal_UI.Data
                 case NotifyCollectionChangedAction.Add:
                     if (e.NewStartingIndex < 12)
                     {
-                        TopItems.Insert(e.NewStartingIndex,Items[e.NewStartingIndex]);
+                        TopItems.Insert(e.NewStartingIndex, Items[e.NewStartingIndex]);
                         if (TopItems.Count > 12)
                         {
                             TopItems.RemoveAt(12);
@@ -211,7 +216,7 @@ namespace aac2aal_UI.Data
         private ObservableCollection<SampleDataItem> _topItem = new ObservableCollection<SampleDataItem>();
         public ObservableCollection<SampleDataItem> TopItems
         {
-            get {return this._topItem; }
+            get { return this._topItem; }
         }
     }
 
@@ -225,6 +230,7 @@ namespace aac2aal_UI.Data
     {
         private static SampleDataSource _sampleDataSource = new SampleDataSource();
 
+
         private ObservableCollection<SampleDataGroup> _allGroups = new ObservableCollection<SampleDataGroup>();
         public ObservableCollection<SampleDataGroup> AllGroups
         {
@@ -234,7 +240,7 @@ namespace aac2aal_UI.Data
         public static IEnumerable<SampleDataGroup> GetGroups(string uniqueId)
         {
             if (!uniqueId.Equals("AllGroups")) throw new ArgumentException("Only 'AllGroups' is supported as a collection of groups");
-            
+            //RefreshDataSource();
             return _sampleDataSource.AllGroups;
         }
 
@@ -254,283 +260,166 @@ namespace aac2aal_UI.Data
             return null;
         }
 
-        public SampleDataSource()
+        public SampleDataSource() 
         {
-            String ITEM_CONTENT = String.Format("Item Content: {0}\n\n{0}\n\n{0}\n\n{0}\n\n{0}\n\n{0}\n\n{0}",
-                        "Curabitur class aliquam vestibulum nam curae maecenas sed integer cras phasellus suspendisse quisque donec dis praesent accumsan bibendum pellentesque condimentum adipiscing etiam consequat vivamus dictumst aliquam duis convallis scelerisque est parturient ullamcorper aliquet fusce suspendisse nunc hac eleifend amet blandit facilisi condimentum commodo scelerisque faucibus aenean ullamcorper ante mauris dignissim consectetuer nullam lorem vestibulum habitant conubia elementum pellentesque morbi facilisis arcu sollicitudin diam cubilia aptent vestibulum auctor eget dapibus pellentesque inceptos leo egestas interdum nulla consectetuer suspendisse adipiscing pellentesque proin lobortis sollicitudin augue elit mus congue fermentum parturient fringilla euismod feugiat");
+           // RefreshDataSource();
+        }
 
-            var group1 = new SampleDataGroup("Group-1",
-                    "Group Title: 1",
-                    "Group Subtitle: 1",
-                    "Assets/DarkGray.png",
-                    "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
-            group1.Items.Add(new SampleDataItem("Group-1-Item-1",
-                    "Item Title: 1",
-                    "Item Subtitle: 1",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group1));
-            group1.Items.Add(new SampleDataItem("Group-1-Item-2",
-                    "Item Title: 2",
-                    "Item Subtitle: 2",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group1));
-            group1.Items.Add(new SampleDataItem("Group-1-Item-3",
-                    "Item Title: 3",
-                    "Item Subtitle: 3",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group1));
-            group1.Items.Add(new SampleDataItem("Group-1-Item-4",
-                    "Item Title: 4",
-                    "Item Subtitle: 4",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group1));
-            group1.Items.Add(new SampleDataItem("Group-1-Item-5",
-                    "Item Title: 5",
-                    "Item Subtitle: 5",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group1));
-            this.AllGroups.Add(group1);
 
-            var group2 = new SampleDataGroup("Group-2",
-                    "Group Title: 2",
-                    "Group Subtitle: 2",
-                    "Assets/LightGray.png",
-                    "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
-            group2.Items.Add(new SampleDataItem("Group-2-Item-1",
-                    "Item Title: 1",
-                    "Item Subtitle: 1",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group2));
-            group2.Items.Add(new SampleDataItem("Group-2-Item-2",
-                    "Item Title: 2",
-                    "Item Subtitle: 2",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group2));
-            group2.Items.Add(new SampleDataItem("Group-2-Item-3",
-                    "Item Title: 3",
-                    "Item Subtitle: 3",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group2));
-            this.AllGroups.Add(group2);
+        public static void RefreshDataSource()
+        {
 
-            var group3 = new SampleDataGroup("Group-3",
-                    "Group Title: 3",
-                    "Group Subtitle: 3",
-                    "Assets/MediumGray.png",
-                    "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
-            group3.Items.Add(new SampleDataItem("Group-3-Item-1",
-                    "Item Title: 1",
-                    "Item Subtitle: 1",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group3));
-            group3.Items.Add(new SampleDataItem("Group-3-Item-2",
-                    "Item Title: 2",
-                    "Item Subtitle: 2",
+            IJsonUtils iju = new JsonUtils();
+            EventbusMessage ebm = iju.convertfromJson(getJsonString());
+            List<String> groups = new List<String>();
+            List<SampleDataGroup> sampleDataGroups = new List<SampleDataGroup>();
+            /*groups.Add("SENSOR");
+            groups.Add("ACTUATOR");
+            foreach (var group in groups)
+            {
+                var sampleDataGroup = new SampleDataGroup(
+                    group,
+                    group,
+                    group,
                     "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group3));
-            group3.Items.Add(new SampleDataItem("Group-3-Item-3",
-                    "Item Title: 3",
-                    "Item Subtitle: 3",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group3));
-            group3.Items.Add(new SampleDataItem("Group-3-Item-4",
-                    "Item Title: 4",
-                    "Item Subtitle: 4",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group3));
-            group3.Items.Add(new SampleDataItem("Group-3-Item-5",
-                    "Item Title: 5",
-                    "Item Subtitle: 5",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group3));
-            group3.Items.Add(new SampleDataItem("Group-3-Item-6",
-                    "Item Title: 6",
-                    "Item Subtitle: 6",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group3));
-            group3.Items.Add(new SampleDataItem("Group-3-Item-7",
-                    "Item Title: 7",
-                    "Item Subtitle: 7",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group3));
-            this.AllGroups.Add(group3);
+                    group);
 
-            var group4 = new SampleDataGroup("Group-4",
-                    "Group Title: 4",
-                    "Group Subtitle: 4",
-                    "Assets/LightGray.png",
-                    "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
-            group4.Items.Add(new SampleDataItem("Group-4-Item-1",
-                    "Item Title: 1",
-                    "Item Subtitle: 1",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group4));
-            group4.Items.Add(new SampleDataItem("Group-4-Item-2",
-                    "Item Title: 2",
-                    "Item Subtitle: 2",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group4));
-            group4.Items.Add(new SampleDataItem("Group-4-Item-3",
-                    "Item Title: 3",
-                    "Item Subtitle: 3",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group4));
-            group4.Items.Add(new SampleDataItem("Group-4-Item-4",
-                    "Item Title: 4",
-                    "Item Subtitle: 4",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group4));
-            group4.Items.Add(new SampleDataItem("Group-4-Item-5",
-                    "Item Title: 5",
-                    "Item Subtitle: 5",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group4));
-            group4.Items.Add(new SampleDataItem("Group-4-Item-6",
-                    "Item Title: 6",
-                    "Item Subtitle: 6",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group4));
-            this.AllGroups.Add(group4);
+                _sampleDataSource.AllGroups.Add(sampleDataGroup);
 
-            var group5 = new SampleDataGroup("Group-5",
-                    "Group Title: 5",
-                    "Group Subtitle: 5",
-                    "Assets/MediumGray.png",
-                    "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
-            group5.Items.Add(new SampleDataItem("Group-5-Item-1",
-                    "Item Title: 1",
-                    "Item Subtitle: 1",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group5));
-            group5.Items.Add(new SampleDataItem("Group-5-Item-2",
-                    "Item Title: 2",
-                    "Item Subtitle: 2",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group5));
-            group5.Items.Add(new SampleDataItem("Group-5-Item-3",
-                    "Item Title: 3",
-                    "Item Subtitle: 3",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group5));
-            group5.Items.Add(new SampleDataItem("Group-5-Item-4",
-                    "Item Title: 4",
-                    "Item Subtitle: 4",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group5));
-            this.AllGroups.Add(group5);
+                foreach (var Device in ebm.Body.Devices)
+                {
+                    String cat = Device.Category;
+                    switch (cat)
+                    {
+                        case "SENSOR":
+                            if (Device.Metavalues.CONFIGURATION != null)
+                            {
+                                sampleDataGroup.Items.Add(new SampleDataItem(
+                                    Convert.ToString(Device.Id),
+                                    Device.Metavalues.CONFIGURATION.Value,
+                                    Device.Metavalues.CONFIGURATION.Value,
+                                    "Assets/LightGray.png",
+                                    "DESCRIPTION",
+                                    "CONTENT",
+                                    sampleDataGroup));
+                                break;
+                            }
+                                break;
 
-            var group6 = new SampleDataGroup("Group-6",
-                    "Group Title: 6",
-                    "Group Subtitle: 6",
-                    "Assets/DarkGray.png",
-                    "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
-            group6.Items.Add(new SampleDataItem("Group-6-Item-1",
-                    "Item Title: 1",
-                    "Item Subtitle: 1",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            group6.Items.Add(new SampleDataItem("Group-6-Item-2",
-                    "Item Title: 2",
-                    "Item Subtitle: 2",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            group6.Items.Add(new SampleDataItem("Group-6-Item-3",
-                    "Item Title: 3",
-                    "Item Subtitle: 3",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            group6.Items.Add(new SampleDataItem("Group-6-Item-4",
-                    "Item Title: 4",
-                    "Item Subtitle: 4",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            group6.Items.Add(new SampleDataItem("Group-6-Item-5",
-                    "Item Title: 5",
-                    "Item Subtitle: 5",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            group6.Items.Add(new SampleDataItem("Group-6-Item-6",
-                    "Item Title: 6",
-                    "Item Subtitle: 6",
-                    "Assets/MediumGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            group6.Items.Add(new SampleDataItem("Group-6-Item-7",
-                    "Item Title: 7",
-                    "Item Subtitle: 7",
-                    "Assets/DarkGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            group6.Items.Add(new SampleDataItem("Group-6-Item-8",
-                    "Item Title: 8",
-                    "Item Subtitle: 8",
-                    "Assets/LightGray.png",
-                    "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    ITEM_CONTENT,
-                    group6));
-            this.AllGroups.Add(group6);
+                           
+                            
+                        case "ACTUATOR":
+                                if (Device.Metavalues.CONFIGURATION != null)
+                                {
+                                    sampleDataGroup.Items.Add(new SampleDataItem(
+                                        Convert.ToString(Device.Id),
+                                        Device.Metavalues.CONFIGURATION.Value,
+                                        Device.Metavalues.CONFIGURATION.Value,
+                                        "Assets/LightGray.png",
+                                        "DESCRIPTION",
+                                        "CONTENT",
+                                        sampleDataGroup));
+                                    break;
+                                }
+                                break;
+                    }
+                }
+
+            }*/
+
+            foreach (var Device in ebm.Body.Devices)
+            {
+                
+                if (Device.Category.Equals("SENSOR"))
+                {
+                    if (!groups.Contains("SENSOR"))
+                    {
+                        groups.Add(Device.Category);
+                        var sampleDataGroup = new SampleDataGroup(
+                        Device.Category,
+                        Device.Category,
+                        Device.Category,
+                        "Assets/LightGray.png",
+                        "DESCRIPTION");
+                        _sampleDataSource._allGroups.Add(sampleDataGroup);
+                        sampleDataGroups.Add(sampleDataGroup);
+
+                    }
+                }
+                else
+                {
+                    if (!groups.Contains("ACTUATOR"))
+                    {
+                        groups.Add(Device.Category);
+                        var sampleDataGroup = new SampleDataGroup(
+                        Device.Category,
+                        Device.Category,
+                        Device.Category,
+                        "Assets/LightGray.png",
+                        "DESCRIPTION");
+                        _sampleDataSource._allGroups.Add(sampleDataGroup);
+                        sampleDataGroups.Add(sampleDataGroup);
+                    }
+
+                }
+            }
+
+            foreach (var Device in ebm.Body.Devices)
+            {
+                if (Device.Category.Equals("SENSOR"))
+                {
+                    if (Device.Metavalues.CONFIGURATION != null)
+                    {
+                        SampleDataGroup sampleDataGroup = sampleDataGroups[0];
+                        sampleDataGroup.Items.Add(new SampleDataItem(
+                            Convert.ToString(Device.Id),
+                            Device.Metavalues.CONFIGURATION.Value,
+                            Device.Metavalues.CONFIGURATION.Value,
+                            "Assets/LightGray.png",
+                            "DESCRIPTION",
+                            "CONTENT",
+                            sampleDataGroup));
+                    }
+                }
+                else if(Device.Category.Equals("ACTUATOR"))
+                {
+                    if (Device.Metavalues.CONFIGURATION != null)
+                    {
+                        sampleDataGroups[1].Items.Add(new SampleDataItem(
+                            Convert.ToString(Device.Id),
+                            Device.Metavalues.CONFIGURATION.Value,
+                            Device.Metavalues.CONFIGURATION.Value,
+                            "Assets/LightGray.png",
+                            "DESCRIPTION",
+                            "CONTENT",
+                            sampleDataGroups[1]));
+                    }
+                }
+
+                
+            }
+            
+           
+        }
+        
+
+        private SampleDataGroup AddToGroup(Device device)
+        {
+            SampleDataGroup sampleDataGroup = new SampleDataGroup(
+                        device.Category,
+                        device.Category,
+                        device.Category,
+                        "Assets/LightGray.png",
+                        "DESCRIPTION");
+            _sampleDataSource.AllGroups.Add(sampleDataGroup);
+
+            return sampleDataGroup;
+        }
+
+        public static String getJsonString()
+        {
+            String jsonString = "{\"address\":\"demoClient\",\"mode\":\"send\",\"bodyType\":\"at.ac.ait.hbs.homer.core.common.flat.Flat\",\"senderId\":\"HOME_CONTROL_SERVICE\",\"body\":{\"id\":1,\"devices\":[{\"id\":1,\"type\":11,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1622.0,\"y\":825.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"23\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Microwave \"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":4,\"type\":10,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1636.0,\"y\":950.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"7\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Cups cupboard \"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":5,\"type\":0,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1323.0,\"y\":827.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"8\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Fridge \"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":6,\"type\":0,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1470.0,\"y\":950.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"20\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Plates cupboard \"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":8,\"type\":11,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1260.0,\"y\":825.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"1\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"dishwasher 1\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":10,\"type\":11,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1561.0,\"y\":825.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"12\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Freezer 1\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":11,\"type\":10,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1335.0,\"y\":951.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"5\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Pans cupboard 1\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":12,\"type\":11,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1474.0,\"y\":823.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"14\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Washingmachine 2\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":13,\"type\":10,\"category\":\"SENSOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1228.0,\"y\":953.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"6\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"groceries cupboard 2\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":1,\"type\":1001,\"category\":\"ACTUATOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1392.0,\"y\":888.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"-1\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"test123\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"KNX\"}}},{\"id\":2,\"type\":1001,\"category\":\"ACTUATOR\",\"roomId\":1,\"coordinate\":{\"index\":0,\"x\":1142.0,\"y\":906.0},\"areaCoordinates\":[],\"metavalues\":{\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"ARC\"}}},{\"id\":15,\"type\":10,\"category\":\"SENSOR\",\"roomId\":3,\"coordinate\":{\"index\":0,\"x\":1516.0,\"y\":648.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"3464\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":2,\"type\":10,\"category\":\"SENSOR\",\"roomId\":5,\"coordinate\":{\"index\":0,\"x\":940.0,\"y\":326.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"18\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Hall-Toilet door 5\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":3,\"type\":0,\"category\":\"SENSOR\",\"roomId\":5,\"coordinate\":{\"index\":0,\"x\":942.0,\"y\":500.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"9\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Hall-Bathroom door \"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":7,\"type\":10,\"category\":\"SENSOR\",\"roomId\":5,\"coordinate\":{\"index\":0,\"x\":1102.0,\"y\":111.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"17\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"frontdoor 1\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":14,\"type\":10,\"category\":\"SENSOR\",\"roomId\":5,\"coordinate\":{\"index\":0,\"x\":1104.0,\"y\":434.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"13\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"Hall-Bedroom door 2\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}},{\"id\":9,\"type\":11,\"category\":\"SENSOR\",\"roomId\":7,\"coordinate\":{\"index\":0,\"x\":753.0,\"y\":304.0},\"areaCoordinates\":[],\"metavalues\":{\"HARDWARE_ID\":{\"key\":\"HARDWARE_ID\",\"type\":\"NUMERIC\",\"value\":\"24\"},\"CONFIGURATION\":{\"key\":\"CONFIGURATION\",\"type\":\"STRING\",\"value\":\"ToiletFlush 1\"},\"MANUFACTURER\":{\"key\":\"MANUFACTURER\",\"type\":\"STRING\",\"value\":\"EATON\"},\"GATEWAY\":{\"key\":\"GATEWAY\",\"type\":\"NUMERIC\",\"value\":\"1\"}}}],\"rooms\":[{\"id\":1,\"type\":\"MDC_AI_LOCATION_KITCHEN\",\"coordinates\":[{\"index\":1,\"x\":1108.0,\"y\":982.0},{\"index\":2,\"x\":1108.0,\"y\":802.0},{\"index\":3,\"x\":1677.0,\"y\":802.0},{\"index\":4,\"x\":1677.0,\"y\":982.0}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Kitchen\"}}},{\"id\":3,\"type\":\"MDC_AI_LOCATION_BEDROOM\",\"coordinates\":[{\"index\":1,\"x\":1109.0,\"y\":802.0},{\"index\":2,\"x\":1677.0,\"y\":802.0},{\"index\":3,\"x\":1677.0,\"y\":397.0},{\"index\":4,\"x\":1112.0,\"y\":397.0}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Sleeping room\"}}},{\"id\":4,\"type\":\"MDC_AI_LOCATION_LIVINGROOM\",\"coordinates\":[{\"index\":1,\"x\":1112.0,\"y\":982.0},{\"index\":2,\"x\":500.0,\"y\":982.0},{\"index\":3,\"x\":500.0,\"y\":253.0},{\"index\":4,\"x\":738.0,\"y\":253.0},{\"index\":5,\"x\":738.0,\"y\":545.0},{\"index\":6,\"x\":1112.0,\"y\":545.0}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Living room\"}}},{\"id\":5,\"type\":\"MDC_AI_LOCATION_HALL\",\"coordinates\":[{\"index\":1,\"x\":933.0,\"y\":545.0},{\"index\":2,\"x\":933.0,\"y\":17.0},{\"index\":3,\"x\":1112.0,\"y\":17.0},{\"index\":4,\"x\":1112.0,\"y\":545.0}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Hall\"}}},{\"id\":6,\"type\":\"MDC_AI_LOCATION_SHOWERROOM\",\"coordinates\":[{\"index\":1,\"x\":738.0,\"y\":545.0},{\"index\":2,\"x\":738.0,\"y\":357.0},{\"index\":3,\"x\":933.0,\"y\":357.0},{\"index\":4,\"x\":933.0,\"y\":545.0}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Bathroom\"}}},{\"id\":7,\"type\":\"MDC_AI_LOCATION_TOILET\",\"coordinates\":[{\"index\":1,\"x\":738.0,\"y\":357.0},{\"index\":2,\"x\":738.0,\"y\":253.0},{\"index\":3,\"x\":933.0,\"y\":253.0},{\"index\":4,\"x\":933.0,\"y\":357.0}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Toilet\"}}},{\"id\":8,\"type\":\"MDC_AI_LOCATION_STUDY\",\"coordinates\":[{\"index\":1,\"x\":585.0,\"y\":253.0},{\"index\":2,\"x\":585.0,\"y\":-30.0},{\"index\":3,\"x\":933.0,\"y\":-30.0},{\"index\":4,\"x\":933.0,\"y\":253.0}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Student room\"}}}],\"doors\":[{\"id\":2,\"coordinates\":[{\"index\":1,\"x\":1112.0,\"y\":506.0},{\"index\":2,\"x\":1112.0,\"y\":425.0}],\"rooms\":[{\"id\":3},{\"id\":5}]},{\"id\":4,\"coordinates\":[{\"index\":1,\"x\":933.0,\"y\":493.0},{\"index\":2,\"x\":933.0,\"y\":408.0}],\"rooms\":[{\"id\":5},{\"id\":6}]},{\"id\":3,\"coordinates\":[{\"index\":1,\"x\":973.0,\"y\":545.0},{\"index\":2,\"x\":1070.0,\"y\":545.0}],\"rooms\":[{\"id\":4},{\"id\":5}]},{\"id\":5,\"coordinates\":[{\"index\":1,\"x\":933.0,\"y\":332.0},{\"index\":2,\"x\":933.0,\"y\":269.0}],\"rooms\":[{\"id\":5},{\"id\":7}]},{\"id\":1,\"coordinates\":[{\"index\":1,\"x\":1112.0,\"y\":943.0},{\"index\":2,\"x\":1112.0,\"y\":850.0}],\"rooms\":[{\"id\":1}]},{\"id\":6,\"coordinates\":[{\"index\":1,\"x\":933.0,\"y\":155.0},{\"index\":2,\"x\":933.0,\"y\":65.0}],\"rooms\":[{\"id\":5},{\"id\":8}]}],\"metavalues\":{\"DESCRIPTION\":{\"key\":\"DESCRIPTION\",\"type\":\"STRING\",\"value\":\"Demo Flat\"},\"ADDRESS\":{\"key\":\"ADDRESS\",\"type\":\"STRING\"},\"GATEWAYS\":{\"key\":\"GATEWAYS\",\"type\":\"JSON\",\"value\":\"[{\\\"gatewayId\\\":1,\\\"serialNr\\\":1234567,\\\"description\\\":\\\"dummy gateway\\\"}]\"}}}}";
+            return jsonString;
         }
     }
 }
