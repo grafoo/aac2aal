@@ -3,21 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kernel.Stubs;
 
-namespace Kernel.Stubs
+namespace Kernel.Services
 {
-    enum Command
+    interface IGetFlatUpdate
     {
-
-	REQUEST_FLAT_CONFIG,
-
-	SWITCH_ACTUATOR,
-
-	DIMM_ACTUATOR,
-	
-	ACTUATOR_STATE_CHANGED
-	
-}
-
+        Task<EventbusMessage> GetFlatConfig();
     }
-
+}

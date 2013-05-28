@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Kernel.Stubs1;
+using Kernel.Stubs;
 
-namespace Kernel.Stubs1
+namespace Kernel.Stubs
 {
 
-    public class DESCRIPTION2
+    public class ADDRESS
     {
 
         [JsonProperty("key")]
@@ -18,9 +18,6 @@ namespace Kernel.Stubs1
 
         [JsonProperty("type")]
         public string Type { get; set; }
-
-        [JsonProperty("value")]
-        public string Value { get; set; }
     }
 
 }

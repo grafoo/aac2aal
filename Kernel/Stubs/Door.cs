@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Kernel.Stubs1;
+using Kernel.Stubs;
 
-namespace Kernel.Stubs1
+namespace Kernel.Stubs
 {
 
     public class Door
@@ -17,10 +17,10 @@ namespace Kernel.Stubs1
         public int Id { get; set; }
 
         [JsonProperty("coordinates")]
-        public Coordinate3[] Coordinates { get; set; }
+        public Coordinate[] Coordinates { get; set; }
 
         [JsonProperty("rooms")]
-        public Room2[] Rooms { get; set; }
+        public Room[] Rooms { get; set; }
     }
 
 }

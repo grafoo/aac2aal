@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Kernel.Stubs1;
+using Kernel.Stubs;
 
-namespace Kernel.Stubs1
+namespace Kernel.Stubs
 {
 
-    public class HARDWAREID
+    public class GATEWAYS
     {
 
         [JsonProperty("key")]
