@@ -29,3 +29,8 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
+log/
+target/
+.idea/
+*.iml
+*.iws
